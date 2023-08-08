@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import Signup from './components/Signup';
+import Login from './components/Login';
+import ForgotPassword from './components/ForgotPassword';
+import { AuthProvider } from './contexts/AuthContext';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 
-function App() {
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get("http://localhost:3000/");
-      setData(result.data);
-    };
-    fetchData();
-  }, []);
-
-  return <div className="App">{JSON.stringify(data)}</div>;
+export default function App() {
+  return (
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route exact path='/' element={<PrivateRoute />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+        </Routes>
+      </AuthProvider>
+    </Router>
+  );
 }
-
-export default App;
