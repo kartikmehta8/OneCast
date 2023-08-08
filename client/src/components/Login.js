@@ -17,7 +17,7 @@ export default function Login() {
       setError('');
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate('/');
+      navigate('/dashboard');
     } catch {
       setError('Failed to log in');
     }
@@ -26,7 +26,7 @@ export default function Login() {
 
   return (
     <div className='centered'>
-      <div className='shadow-xl p-8' style={{ width: '300px' }}>
+      <div className='border p-8' style={{ width: '300px' }}>
         {error && (
           <div
             className='bg-red-500 signUp-font text-white p-2 text-sm flex justify-center mb-4 rounded-sm'
@@ -44,7 +44,7 @@ export default function Login() {
               Email
             </label>
             <input
-              className='shadow appearance-none border border-rounded h-12 w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline signUp-font'
+              className='appearance-none border border-rounded h-12 w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline signUp-font'
               type='email'
               required
               ref={emailRef}
@@ -59,7 +59,7 @@ export default function Login() {
               Password
             </label>
             <input
-              className='shadow appearance-none border border-rounded w-full h-12 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              className='appearance-none border border-rounded w-full h-12 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline'
               type='password'
               ref={passwordRef}
               placeholder='*************'

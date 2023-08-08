@@ -26,7 +26,7 @@ export default function ForgotPassword() {
 
   return (
     <div className='centered'>
-      <div className='shadow-xl p-8' style={{ width: '300px' }}>
+      <div className='border p-8' style={{ width: '300px' }}>
         {message && (
           <div
             className='bg-green-500 signUp-font text-white p-2 text-sm flex justify-center mb-4 rounded-sm'
@@ -52,7 +52,7 @@ export default function ForgotPassword() {
               Email
             </label>
             <input
-              className='shadow appearance-none border border-rounded h-12 w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline signUp-font'
+              className='appearance-none border border-rounded h-12 w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline signUp-font'
               type='email'
               required
               ref={emailRef}
