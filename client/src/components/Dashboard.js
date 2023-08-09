@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Announcement from './Announcement';
+import History from './History';
 
 export default function Dashboard() {
   const [error, setError] = useState('');
@@ -66,7 +67,9 @@ export default function Dashboard() {
             <Announcement />
           </div>
         ) : (
-          <div>History</div>
+          <div>
+            <History />
+          </div>
         )}
       </div>
     </div>
