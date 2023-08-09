@@ -9,6 +9,7 @@ const connectDB = require('./config/ConnectDB');
 
 // Routes Import
 const sampleRoutes = require('./routes/sample');
+const telegramRoutes = require('./routes/telegram');
 const storeRoutes = require('./routes/store');
 
 dotenv.config();
@@ -33,3 +34,5 @@ app.get('/', (req, res) => {
     status: 'OK',
   });
 });
+
+app.use('/telegram', telegramRoutes);
