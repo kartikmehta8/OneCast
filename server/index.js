@@ -27,6 +27,7 @@ app.use(morgan);
 // Routes
 app.use('/sample', sampleRoutes);
 app.use('/store', storeRoutes);
+app.use('/telegram', telegramRoutes);
 
 app.get('/', (req, res) => {
   res.send({
@@ -34,5 +35,3 @@ app.get('/', (req, res) => {
     status: 'OK',
   });
 });
-
-app.use('/telegram', telegramRoutes);
