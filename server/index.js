@@ -9,6 +9,7 @@ const connectDB = require('./config/ConnectDB');
 
 // Routes Import
 const sampleRoutes = require('./routes/sample');
+const storeRoutes = require('./routes/store');
 
 dotenv.config();
 connectDB();
@@ -24,6 +25,7 @@ app.use(morgan);
 
 // Routes
 app.use('/sample', sampleRoutes);
+app.use('/store', storeRoutes);
 
 app.get('/', (req, res) => {
   res.send({

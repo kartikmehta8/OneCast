@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const AnnouncementSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+  },
   subject: {
     type: String,
     required: true,
