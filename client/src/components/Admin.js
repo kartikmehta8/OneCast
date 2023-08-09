@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import Announcement from './Announcement';
-import History from './History';
+import AllAnnouncements from './AllAnnouncements';
+import Users from './Users';
 
-export default function Dashboard() {
+export default function Admin() {
   const [error, setError] = useState('');
-  const { currentUser, logout } = useAuth();
   const [active, setActive] = useState(true);
+
+  const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -23,6 +24,7 @@ export default function Dashboard() {
 
   return (
     <div>
+      {' '}
       {error && <div className=''>{error}</div>}
       <div className='flex justify-between px-12 pt-8'>
         <span
@@ -38,10 +40,10 @@ export default function Dashboard() {
           &nbsp;&nbsp;&nbsp;&nbsp;
           {currentUser.email === 'kartikmehta202@gmail.com' ? (
             <button
-              onClick={() => navigate('/admin')}
+              onClick={() => navigate('/dashboard')}
               className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold h-8 px-2  rounded focus:outline-none focus:shadow-outline signUp-font'
             >
-              Admin Console
+              Dashboard
             </button>
           ) : (
             <div></div>
@@ -72,24 +74,24 @@ export default function Dashboard() {
           onClick={() => setActive(true)}
           style={{ cursor: 'pointer' }}
         >
-          Announcement
+          All Announcements
         </div>
         <div
           className={active === false ? 'text-blue-700 font-bold' : ''}
           onClick={() => setActive(false)}
           style={{ cursor: 'pointer' }}
         >
-          History
+          Users
         </div>
       </div>
       <div>
         {active ? (
           <div>
-            <Announcement />
+            <AllAnnouncements />
           </div>
         ) : (
           <div>
-            <History />
+            <Users />
           </div>
         )}
       </div>

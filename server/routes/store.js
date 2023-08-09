@@ -1,8 +1,13 @@
 const express = require('express');
-const { storeData, getDataByEmail } = require('../controllers/storeController');
+const {
+  storeData,
+  getDataByEmail,
+  getAllData,
+} = require('../controllers/storeController');
 
 const router = express.Router();
 
+router.get('/', getAllData);
 router.post('/', storeData);
 router.get('/:email', getDataByEmail);
 
