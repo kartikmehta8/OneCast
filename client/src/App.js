@@ -5,6 +5,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import Main from './components/Main';
+import AdminRoute from './components/AdminRoute';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <AuthProvider>
         <Routes>
           <Route exact path='/' element={<Main />} />
+          <Route path='/admin' element={<AdminRoute />} />
           <Route path='/dashboard' element={<PrivateRoute />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />

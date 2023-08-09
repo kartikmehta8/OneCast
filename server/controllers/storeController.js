@@ -42,7 +42,23 @@ const getDataByEmail = async (req, res) => {
   }
 };
 
+const getAllData = async (req, res) => {
+  try {
+    const data = await Announcement.find({});
+    res.send({
+      success: true,
+      data,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
+  }
+};
+
 module.exports = {
   storeData,
   getDataByEmail,
+  getAllData,
 };
