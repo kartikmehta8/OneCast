@@ -4,10 +4,21 @@ const Announcement = () => {
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
 
+  const [slack, setSlack] = useState(false);
+  const [discord, setDiscord] = useState(false);
+  const [telegram, setTelegram] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (slack === false && discord === false && telegram === false) {
+      alert('Please select at least one social media');
+      return;
+    }
     console.log('Subject:', subject);
     console.log('Body:', body);
+    console.log('Slack:', slack);
+    console.log('Discord:', discord);
+    console.log('Telegram:', telegram);
   };
 
   return (
@@ -41,19 +52,63 @@ const Announcement = () => {
           />
         </div>
         <div className='flex justify-between'>
-          <button
-            type='submit'
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold h-12 py-2 px-4  rounded focus:outline-none focus:shadow-outline signUp-font'
-            // onClick={handleSubmit}
-          >
-            Continue
-          </button>
-          <button
-            type='submit'
-            className='bg-green-500 hover:bg-green-700 text-white font-bold h-12 py-2 px-4  rounded focus:outline-none focus:shadow-outline signUp-font'
+          <div></div>
+          <span
+            style={{ cursor: 'pointer' }}
+            className='bg-green-500 hover:bg-green-700 text-white font-bold h-10 py-2 px-4  rounded focus:outline-none focus:shadow-outline signUp-font'
           >
             &nbsp;GenAI&nbsp;
-          </button>
+          </span>
+        </div>
+        <div>
+          {subject && body ? (
+            <div>
+              <div className='mt-4'>
+                <label className='block text-gray-600 text-sm font-bold mb-2 signUp-font'>
+                  Social Media
+                </label>
+                <div className='flex justify-between'>
+                  <div className='flex items-center'>
+                    <input
+                      type='checkbox'
+                      className='mr-2 leading-tight'
+                      checked={slack}
+                      onChange={() => setSlack(!slack)}
+                    />
+                    <span className='text-sm signUp-font'>Slack</span>
+
+                    <input
+                      type='checkbox'
+                      className='ml-4 mr-2 leading-tight'
+                      checked={discord}
+                      onChange={() => setDiscord(!discord)}
+                    />
+                    <span className='text-sm signUp-font'>Discord</span>
+
+                    <input
+                      type='checkbox'
+                      className='ml-4 mr-2 leading-tight'
+                      checked={telegram}
+                      onChange={() => setTelegram(!telegram)}
+                    />
+
+                    <span className='text-sm signUp-font'>Telegram</span>
+                  </div>
+                </div>
+              </div>
+              <div className='mt-12 flex justify-end'>
+                <span
+                  style={{ cursor: 'pointer' }}
+                  className='bg-blue-500 hover:bg-blue-700 text-white font-bold h-10 py-2 px-4  rounded focus:outline-none focus:shadow-outline signUp-font'
+                  onClick={handleSubmit}
+                >
+                  &nbsp;Send&nbsp;
+                </span>
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       </form>
     </div>
