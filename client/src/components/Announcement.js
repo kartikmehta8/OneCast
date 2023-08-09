@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useAuth } from '../contexts/AuthContext';
 
 const Announcement = () => {
   const [subject, setSubject] = useState('');
@@ -8,17 +10,30 @@ const Announcement = () => {
   const [discord, setDiscord] = useState(false);
   const [telegram, setTelegram] = useState(false);
 
-  const handleSubmit = (e) => {
+  const { currentUser } = useAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (slack === false && discord === false && telegram === false) {
       alert('Please select at least one social media');
       return;
     }
-    console.log('Subject:', subject);
-    console.log('Body:', body);
-    console.log('Slack:', slack);
-    console.log('Discord:', discord);
-    console.log('Telegram:', telegram);
+
+    const response = await axios.post('http://localhost:5000/store/', {
+      email: currentUser.email,
+      subject,
+      body,
+      slack,
+      discord,
+      telegram,
+    });
+
+    alert(response.data.success);
+    setSubject('');
+    setBody('');
+    setSlack(false);
+    setDiscord(false);
+    setTelegram(false);
   };
 
   return (
