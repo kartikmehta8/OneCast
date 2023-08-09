@@ -5,11 +5,13 @@ const clusterMiddleware = require('./middlewares/Clusters');
 const dotenv = require('dotenv');
 const bodyParser = require('./middlewares/BodyParser');
 const morgan = require('./middlewares/Morgan');
+const connectDB = require('./config/ConnectDB');
 
 // Routes Import
 const sampleRoutes = require('./routes/sample');
 
 dotenv.config();
+connectDB();
 
 const app = express();
 
