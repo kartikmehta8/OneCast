@@ -8,6 +8,7 @@ const morgan = require('./middlewares/Morgan');
 
 // Routes Import
 const sampleRoutes = require('./routes/sample');
+const telegramRoutes = require('./routes/telegram');
 
 dotenv.config();
 
@@ -29,3 +30,5 @@ app.get('/', (req, res) => {
     status: 'OK',
   });
 });
+
+app.use('/telegram', telegramRoutes);
