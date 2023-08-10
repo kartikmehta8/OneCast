@@ -40,7 +40,7 @@ export default function Users() {
 
   return (
     <div>
-      <div className='flex m-12 justify-between'>
+      <div className='flex m-12 justify-center'>
         <form className='flex text-xl'>
           <div className='mr-8'>
             <label>Email</label>
@@ -89,8 +89,10 @@ export default function Users() {
           </button>
         </form>
       </div>
-      <div>
-        {users.map((user, index) => <UserCard key={index} user={user} />)}
+      <div className='grid grid-cols-3'>
+        {users.map((user, index) => (
+          <UserCard key={index} user={user} index={index} />
+        ))}
       </div>
     </div>
   );
