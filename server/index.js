@@ -12,6 +12,7 @@ const sampleRoutes = require('./routes/sample');
 const telegramRoutes = require('./routes/telegram');
 const storeRoutes = require('./routes/store');
 const slackRoutes = require('./routes/slack');
+const userRoutes = require('./routes/user');
 
 dotenv.config();
 connectDB();
@@ -30,6 +31,7 @@ app.use('/sample', sampleRoutes);
 app.use('/store', storeRoutes);
 app.use('/telegram', telegramRoutes);
 app.use('/slack', slackRoutes);
+app.use('/user', userRoutes);
 
 app.get('/', (req, res) => {
   res.send({
