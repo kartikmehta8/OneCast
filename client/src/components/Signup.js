@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Signup() {
   const emailRef = useRef();
@@ -10,6 +11,16 @@ export default function Signup() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  async function isUserExists(email) {
+    try {
+      const response = await axios.get(`http://localhost:5000/user/${email}`);
+      return response.data.success;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -21,8 +32,13 @@ export default function Signup() {
     try {
       setError('');
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      navigate('/dashboard');
+      const userExists = await isUserExists(emailRef.current.value);
+      if (userExists) {
+        await signup(emailRef.current.value, passwordRef.current.value);
+        navigate('/dashboard');
+      } else {
+        setError("You aren't authorized to create an account!");
+      }
     } catch {
       setError('Failed to create an account');
     }

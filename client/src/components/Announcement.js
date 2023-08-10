@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -9,6 +9,8 @@ const Announcement = () => {
   const [slack, setSlack] = useState(false);
   const [discord, setDiscord] = useState(false);
   const [telegram, setTelegram] = useState(false);
+
+  const [user, setUser] = useState();
 
   const { currentUser } = useAuth();
 
@@ -35,6 +37,19 @@ const Announcement = () => {
     setDiscord(false);
     setTelegram(false);
   };
+
+  useEffect(() => {
+    async function userAccess(email) {
+      try {
+        const response = await axios.get(`http://localhost:5000/user/${email}`);
+        setUser(response.data.user);
+        console.log(response.data.user);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    userAccess(currentUser.email);
+  }, [currentUser.email]);
 
   return (
     <div className='flex justify-center items-center pt-20'>
@@ -84,30 +99,47 @@ const Announcement = () => {
                 </label>
                 <div className='flex justify-between'>
                   <div className='flex items-center'>
-                    <input
-                      type='checkbox'
-                      className='mr-2 leading-tight'
-                      checked={slack}
-                      onChange={() => setSlack(!slack)}
-                    />
-                    <span className='text-sm signUp-font'>Slack</span>
+                    {user.slack ? (
+                      <div>
+                        <input
+                          type='checkbox'
+                          className='mr-2 leading-tight'
+                          checked={slack}
+                          onChange={() => setSlack(!slack)}
+                        />
+                        <span className='text-sm signUp-font'>Slack</span>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
-                    <input
-                      type='checkbox'
-                      className='ml-4 mr-2 leading-tight'
-                      checked={discord}
-                      onChange={() => setDiscord(!discord)}
-                    />
-                    <span className='text-sm signUp-font'>Discord</span>
+                    {user.discord ? (
+                      <div>
+                        <input
+                          type='checkbox'
+                          className='ml-4 mr-2 leading-tight'
+                          checked={discord}
+                          onChange={() => setDiscord(!discord)}
+                        />
+                        <span className='text-sm signUp-font'>Discord</span>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
-                    <input
-                      type='checkbox'
-                      className='ml-4 mr-2 leading-tight'
-                      checked={telegram}
-                      onChange={() => setTelegram(!telegram)}
-                    />
-
-                    <span className='text-sm signUp-font'>Telegram</span>
+                    {user.telegram ? (
+                      <div>
+                        <input
+                          type='checkbox'
+                          className='ml-4 mr-2 leading-tight'
+                          checked={telegram}
+                          onChange={() => setTelegram(!telegram)}
+                        />
+                        <span className='text-sm signUp-font'>Telegram</span>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
               </div>

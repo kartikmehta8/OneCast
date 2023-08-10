@@ -1,8 +1,19 @@
 import React from 'react';
 
-export default function UserCard({ user }) {
+export default function UserCard({ user, index }) {
+  function genFlex(index) {
+    if (index % 3 === 0) {
+      return 'justify-end';
+    }
+    if (index % 3 === 1) {
+      return 'justify-center';
+    }
+    if (index % 3 === 2) {
+      return 'justify-start';
+    }
+  }
   return (
-    <div className='flex justify-center mt-12 signUp-font'>
+    <div className={'flex mt-12 signUp-font ' + genFlex(index)}>
       <div className='p-8 border' style={{ width: '400px' }}>
         <div className='text-2xl font-bold'>{user.email}</div>
         <div className='mt-4'>
