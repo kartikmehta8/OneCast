@@ -11,6 +11,7 @@ const connectDB = require('./config/ConnectDB');
 const sampleRoutes = require('./routes/sample');
 const telegramRoutes = require('./routes/telegram');
 const storeRoutes = require('./routes/store');
+const userRoutes = require('./routes/user');
 
 dotenv.config();
 connectDB();
@@ -28,6 +29,7 @@ app.use(morgan);
 app.use('/sample', sampleRoutes);
 app.use('/store', storeRoutes);
 app.use('/telegram', telegramRoutes);
+app.use('/user', userRoutes);
 
 app.get('/', (req, res) => {
   res.send({
