@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { Client, IntentsBitField } = require('discord.js');
 
-const BOT_TOKEN = 'MTEzOTE4NTY4OTEyNTE5MTczMA.GmBxRt.otnaGK2eLV3Jn7OlK0gNYXQWv1JDeTF_5tl5FI';
+const BOT_TOKEN = '';
 const client = new Client({
   intents: [
     IntentsBitField.Flags.Guilds,
@@ -10,41 +10,29 @@ const client = new Client({
   ],
 });
 
-const sendMessageToDiscordChannel = async (message) => {
+async function sendMessage( req, res, next) {
   try {
-    const channelID = '1139074914826059777'; // Replace with your desired channel ID
-    const channel = await client.channels.fetch(channelID);
+    const { content } = req.body;
 
-    if (channel.isText()) {
-      await channel.send(message);
-      return { success: true, message: 'Message sent successfully' };
-    } else {
-      return { success: false, message: 'Invalid channel type' };
-    }
+    // Create a message to be sent to the Discord channel
+    const message = {
+      content,
+    };
+
+    // Send the message using Axios
+    await axios.post(`https://discord.com/api/v10/channels/1139074914826059777/messages`, message, {
+      headers: {
+        Authorization: `Bot ${BOT_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    res.status(200).json({ message: 'Message sent successfully' });
   } catch (error) {
-    return { success: false, message: error.message };
+    console.error('Error sending message:', error);
+    res.status(500).json({ error: 'An error occurred while sending the message' });
   }
-};
-
-const sendMessage = async (req, res) => {
-  const { body } = req.body;
-
-  const response = await sendMessageToDiscordChannel(body);
-
-  if (response.success) {
-    res.send({
-      success: true,
-      message: response.message,
-    });
-  } else {
-    res.send({
-      success: false,
-      message: response.message,
-    });
-  }
-};
-
-client.login(BOT_TOKEN);
+}
 module.exports = {
   sendMessage,
 };
