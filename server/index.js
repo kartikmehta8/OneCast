@@ -33,6 +33,7 @@ app.use('/sample', sampleRoutes);
 app.use('/store', storeRoutes);
 app.use('/telegram', telegramRoutes);
 app.use('/user', userRoutes);
+app.use('/discord', discordRoutes);
 app.use('/text', textApiRoutes);
 
 app.get('/', (req, res) => {
