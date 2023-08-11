@@ -34,6 +34,10 @@ export default function History() {
       <div>
         {data.map((item) => (
           <div className='border m-6 p-6 signUp-font'>
+            <div>
+              <span className='text-sm tet-gray-800'>Created: </span>
+              <span className='text-sm font-semibold'>{item.time}</span>
+            </div>
             <h1 className='text-2xl'>{item.subject}</h1>
             <div className='my-2'>{item.body}</div>
             <div className='flex mt-2'>

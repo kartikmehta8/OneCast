@@ -7,6 +7,7 @@ export default function UserCard({ user, index }) {
   const [slack, setSlack] = useState(user.slack);
   const [discord, setDiscord] = useState(user.discord);
   const [telegram, setTelegram] = useState(user.telegram);
+  const time = user.time;
 
   function genFlex(index) {
     if (index % 3 === 0) {
@@ -45,6 +46,7 @@ export default function UserCard({ user, index }) {
           slack,
           discord,
           telegram,
+          time,
         }
       );
       alert(response.data.status);
@@ -76,24 +78,31 @@ export default function UserCard({ user, index }) {
             </span>
           )}
         </div>
-        <div className='flex justify-end mt-4'>
-          <button
-            className={
-              'text-white py-1 px-2 rounded-l-md' +
-              (edit
-                ? ' bg-yellow-500 hover:bg-yellow-600'
-                : ' bg-green-500 hover:bg-green-600')
-            }
-            onClick={() => setEdit(!edit)}
-          >
-            {!edit ? 'Edit' : 'Cancel'}
-          </button>
-          <button
-            className='bg-red-500 hover:bg-red-600 text-white py-1 px-2 ml-1 rounded-r-md'
-            onClick={() => handleDelete(user.email)}
-          >
-            Delete
-          </button>
+        <div className='flex justify-between mt-4'>
+          <div>
+            {time && (
+              <><span className='text-gray-800 text:sm'>Created:  </span><span className='text-sm signUp-font font-bold'>{time}</span></>
+            )}
+          </div>
+          <div>
+            <button
+              className={
+                'text-white py-1 px-2 rounded-l-md' +
+                (edit
+                  ? ' bg-yellow-500 hover:bg-yellow-600'
+                  : ' bg-green-500 hover:bg-green-600')
+              }
+              onClick={() => setEdit(!edit)}
+            >
+              {!edit ? 'Edit' : 'Cancel'}
+            </button>
+            <button
+              className='bg-red-500 hover:bg-red-600 text-white py-1 px-2 ml-1 rounded-r-md'
+              onClick={() => handleDelete(user.email)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
         {edit && (
           <div className='signUp-font mt-4'>
