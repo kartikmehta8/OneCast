@@ -6,8 +6,7 @@ async function sendMessage(req, res, next) {
 
     // Create a message to be sent to the Discord channel
     const message = {
-      content,
-      username: "Tushar"
+      content
     };
 
     const response = await axios({
