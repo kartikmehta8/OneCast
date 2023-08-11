@@ -1,31 +1,21 @@
 const axios = require('axios');
-const { Client, IntentsBitField } = require('discord.js');
 
-const BOT_TOKEN = '';
-const client = new Client({
-  intents: [
-    IntentsBitField.Flags.Guilds,
-    IntentsBitField.Flags.GuildMessages,
-    IntentsBitField.Flags.MessageContent,
-  ],
-});
-
-async function sendMessage( req, res, next) {
+async function sendMessage(req, res, next) {
   try {
-    const { content } = req.body;
+    const { content, webhookUrl } = req.body;
 
     // Create a message to be sent to the Discord channel
     const message = {
       content,
+      username: "Tushar"
     };
 
-    // Send the message using Axios
-    await axios.post(`https://discord.com/api/v10/channels/1139074914826059777/messages`, message, {
-      headers: {
-        Authorization: `Bot ${BOT_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await axios({
+      method: "POST",
+      url: webhookUrl,
+      data: message
+    })
+    console.log(response.status);
 
     res.status(200).json({ message: 'Message sent successfully' });
   } catch (error) {
