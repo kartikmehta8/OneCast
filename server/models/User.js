@@ -17,6 +17,10 @@ const User = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  time: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('User', User);
