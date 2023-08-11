@@ -5,8 +5,8 @@ const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
     users.sort((a, b) => {
-      const timeA = moment(a.time, "DD/MM/YYYY").toDate();
-      const timeB = moment(b.time, "DD/MM/YYYY").toDate();
+      const timeA = moment(a.time, 'DD/MM/YYYY').toDate();
+      const timeB = moment(b.time, 'DD/MM/YYYY').toDate();
       return timeB - timeA;
     });
     res.status(200).send({
@@ -26,7 +26,7 @@ const storeUser = async (req, res) => {
   const _time = new Date().toLocaleString('en-US', {
     timeZone: 'Asia/Kolkata',
   });
-  const time = moment(_time, "M/D/YYYY, h:mm:ss A").format("DD/MM/YYYY");
+  const time = moment(_time, 'M/D/YYYY, h:mm:ss A').format('DD/MM/YYYY');
 
   const newUser = new User({
     email,

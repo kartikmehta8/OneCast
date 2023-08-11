@@ -81,7 +81,10 @@ export default function UserCard({ user, index }) {
         <div className='flex justify-between mt-4'>
           <div>
             {time && (
-              <><span className='text-gray-800 text:sm'>Created:  </span><span className='text-sm signUp-font font-bold'>{time}</span></>
+              <>
+                <span className='text-gray-800 text:sm'>Created: </span>
+                <span className='text-sm signUp-font font-bold'>{time}</span>
+              </>
             )}
           </div>
           <div>

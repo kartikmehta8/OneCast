@@ -31,7 +31,7 @@ export default function AllAnnouncements() {
           <div key={index} className='border m-6 p-6 signUp-font'>
             <div className='flex justify-between'>
               <span>
-                <span className='text-sm tet-gray-800'>Created: </span>
+                <span className='text-sm tet-gray-800'>Announced: </span>
                 <span className='text-sm font-semibold'>{item.time}</span>
               </span>
               <span
