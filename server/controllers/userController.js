@@ -97,9 +97,39 @@ const deleteUserByEmail = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send({
+        status: 'Not Found',
+        message: 'User not found',
+        success: false,
+      });
+    } else {
+      res.status(200).send({
+        status: 'Success',
+        message: 'User found',
+        success: true,
+        user,
+      });
+    }
+  } catch (error) {
+    res.status(500).send({
+      status: 'Internal Server Error',
+      success: false,
+      error,
+    });
+  }
+};
+
 module.exports = {
   getAllUsers,
   storeUser,
   setUserByEmail,
   deleteUserByEmail,
+  getUser,
 };

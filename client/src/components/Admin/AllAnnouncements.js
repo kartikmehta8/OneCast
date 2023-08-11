@@ -27,8 +27,8 @@ export default function AllAnnouncements() {
   return (
     <div className='flex justify-center mt-12'>
       <div>
-        {data.map((item) => (
-          <div className='border m-6 p-6 signUp-font'>
+        {data.map((item, index) => (
+          <div key={index} className='border m-6 p-6 signUp-font'>
             <div className='flex justify-end'>
               <span
                 className='border py-1 px-2 rounded-xl'

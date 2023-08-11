@@ -1,25 +1,25 @@
 import React, { useRef, useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function ForgotPassword() {
+export default function Login() {
   const emailRef = useRef();
-  const { resetPassword } = useAuth();
+  const passwordRef = useRef();
+  const { login } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      setMessage('');
       setError('');
       setLoading(true);
-      await resetPassword(emailRef.current.value);
-      setMessage('Check your inbox for further instructions');
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate('/dashboard');
     } catch {
-      setError('Failed to reset password');
+      setError('Failed to log in');
     }
     setLoading(false);
   }
@@ -27,14 +27,6 @@ export default function ForgotPassword() {
   return (
     <div className='centered'>
       <div className='border p-8' style={{ width: '300px' }}>
-        {message && (
-          <div
-            className='bg-green-500 signUp-font text-white p-2 text-sm flex justify-center mb-4 rounded-sm'
-            style={{ textAlign: 'center' }}
-          >
-            {message}
-          </div>
-        )}
         {error && (
           <div
             className='bg-red-500 signUp-font text-white p-2 text-sm flex justify-center mb-4 rounded-sm'
@@ -59,6 +51,20 @@ export default function ForgotPassword() {
               placeholder='email'
             />
           </div>
+          <div className='mb-4' id='password'>
+            <label
+              className='block text-gray-600 text-sm font-bold mb-2 signUp-font'
+              htmlFor='password'
+            >
+              Password
+            </label>
+            <input
+              className='appearance-none border border-rounded w-full h-12 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              type='password'
+              ref={passwordRef}
+              placeholder='*************'
+            />
+          </div>
 
           <div className='flex items-center justify-between'>
             <button
@@ -66,7 +72,7 @@ export default function ForgotPassword() {
               className='bg-blue-500 hover:bg-blue-700 text-white font-bold w-full h-12 py-2 px-4  rounded focus:outline-none focus:shadow-outline signUp-font'
               type='submit'
             >
-              Reset Password
+              Log In
             </button>
           </div>
         </form>
@@ -76,9 +82,9 @@ export default function ForgotPassword() {
         >
           <Link
             className='font-bold text-blue-600 hover:text-blue-800'
-            to='/login'
+            to='/forgot-password'
           >
-            Log In
+            Forgot Password?
           </Link>
         </div>
         <div

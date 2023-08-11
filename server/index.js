@@ -12,7 +12,9 @@ const sampleRoutes = require('./routes/sample');
 const telegramRoutes = require('./routes/telegram');
 const discordRoutes = require('./routes/discord');
 const storeRoutes = require('./routes/store');
+const slackRoutes = require('./routes/slack');
 const userRoutes = require('./routes/user');
+const textApiRoutes = require('./routes/textApi');
 
 dotenv.config();
 connectDB();
@@ -30,8 +32,8 @@ app.use(morgan);
 app.use('/sample', sampleRoutes);
 app.use('/store', storeRoutes);
 app.use('/telegram', telegramRoutes);
-app.use('/discord', discordRoutes);
 app.use('/user', userRoutes);
+app.use('/text', textApiRoutes);
 
 app.get('/', (req, res) => {
   res.send({
