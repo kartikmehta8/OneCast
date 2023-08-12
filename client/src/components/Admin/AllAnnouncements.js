@@ -29,7 +29,11 @@ export default function AllAnnouncements() {
       <div>
         {data.map((item, index) => (
           <div key={index} className='border m-6 p-6 signUp-font'>
-            <div className='flex justify-end'>
+            <div className='flex justify-between'>
+              <span>
+                <span className='text-sm tet-gray-800'>Announced: </span>
+                <span className='text-sm font-semibold'>{item.time}</span>
+              </span>
               <span
                 className='border py-1 px-2 rounded-xl'
                 style={{ fontSize: '12px' }}
