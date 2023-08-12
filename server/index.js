@@ -10,6 +10,7 @@ const connectDB = require('./config/ConnectDB');
 // Routes Import
 const sampleRoutes = require('./routes/sample');
 const telegramRoutes = require('./routes/telegram');
+const discordRoutes = require('./routes/discord');
 const storeRoutes = require('./routes/store');
 const slackRoutes = require('./routes/slack');
 const userRoutes = require('./routes/user');
@@ -31,8 +32,9 @@ app.use(morgan);
 app.use('/sample', sampleRoutes);
 app.use('/store', storeRoutes);
 app.use('/telegram', telegramRoutes);
-app.use('/slack', slackRoutes);
 app.use('/user', userRoutes);
+app.use('/discord', discordRoutes);
+app.use('/slack', slackRoutes);
 app.use('/text', textApiRoutes);
 
 app.get('/', (req, res) => {
@@ -41,3 +43,4 @@ app.get('/', (req, res) => {
     status: 'OK',
   });
 });
+
