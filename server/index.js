@@ -34,6 +34,7 @@ app.use('/store', storeRoutes);
 app.use('/telegram', telegramRoutes);
 app.use('/user', userRoutes);
 app.use('/discord', discordRoutes);
+app.use('/slack', slackRoutes);
 app.use('/text', textApiRoutes);
 
 app.get('/', (req, res) => {

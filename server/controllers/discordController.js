@@ -2,16 +2,16 @@ const axios = require('axios');
 
 async function sendMessage(req, res, next) {
   try {
-    const { content, webhookUrl } = req.body;
+    const { body, webhookUrl } = req.body;
 
     // Create a message to be sent to the Discord channel
     const message = {
-      content
+      body
     };
 
     const response = await axios({
       method: "POST",
-      url: webhookUrl,
+      url: webhookUrl = PROCESS.env.DISCORD_WEBHOOK_URL,
       data: message
     })
     console.log(response.status);
