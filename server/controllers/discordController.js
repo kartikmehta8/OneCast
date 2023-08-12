@@ -1,5 +1,6 @@
 const axios = require('axios');
-const webhookURL = 'https://discord.com/api/webhooks/1139542261881905253/Ja9FhJQmnweVq27h9euq0R-z9X1gWC4-wpD8hFep7Fc1DLWlRc6CbzdkFc1opEh2Hobf';
+const webhookURL = process.env.WEBHOOK_URL;
+;
 
 async function sendMessageToChannel(message) {
   try {
