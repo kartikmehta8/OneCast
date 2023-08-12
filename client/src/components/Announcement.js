@@ -43,7 +43,6 @@ const Announcement = () => {
       try {
         const response = await axios.get(`http://localhost:5000/user/${email}`);
         setUser(response.data.user);
-        console.log(response.data.user);
       } catch (error) {
         console.log(error);
       }
