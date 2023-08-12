@@ -3,6 +3,6 @@ const { sendMessage } = require('../controllers/discordController');
 
 const router = express.Router();
 
-router.post('/sendMessage', sendMessage);
+router.post('/', sendMessage);
 
 module.exports = router;
