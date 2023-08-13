@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../../constants/constants';
 
 export default function AllAnnouncements() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:5000/store/`);
+      const response = await axios.get(`${BASE_URL}/store/`);
       setData(response.data.data);
     }
     fetchData();

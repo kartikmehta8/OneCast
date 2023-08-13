@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
+import { BASE_URL } from '../constants/constants';
 
 export default function History() {
   const [data, setData] = useState([]);
@@ -10,7 +11,7 @@ export default function History() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `http://localhost:5000/store/${currentUser.email}`
+        `${BASE_URL}/store/${currentUser.email}`
       );
       setData(response.data.data);
     }

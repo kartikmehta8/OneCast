@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../../constants/constants';
 
 export default function UserCard({ user, index }) {
   const [edit, setEdit] = useState(false);
@@ -23,9 +24,7 @@ export default function UserCard({ user, index }) {
 
   async function handleDelete(email) {
     try {
-      const response = await axios.delete(
-        'http://localhost:5000/user/' + email
-      );
+      const response = await axios.delete(`${BASE_URL}/user/` + email);
       alert(response.data.status);
     } catch (error) {
       alert('Failed to delete user.');
@@ -40,15 +39,12 @@ export default function UserCard({ user, index }) {
     }
 
     try {
-      const response = await axios.patch(
-        'http://localhost:5000/user/' + user.email,
-        {
-          slack,
-          discord,
-          telegram,
-          time,
-        }
-      );
+      const response = await axios.patch(`${BASE_URL}/user/` + user.email, {
+        slack,
+        discord,
+        telegram,
+        time,
+      });
       alert(response.data.status);
       setEdit(false);
     } catch (error) {

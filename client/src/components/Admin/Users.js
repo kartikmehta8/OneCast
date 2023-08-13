@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserCard from './UserCard';
+import { BASE_URL } from '../../constants/constants';
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -16,7 +17,7 @@ export default function Users() {
       return;
     }
 
-    const response = await axios.post('http://localhost:5000/user/', {
+    const response = await axios.post(`${BASE_URL}/user/`, {
       email,
       slack,
       discord,
@@ -32,7 +33,7 @@ export default function Users() {
 
   useEffect(() => {
     async function getUsers() {
-      const response = await axios.get('http://localhost:5000/user/');
+      const response = await axios.get(`${BASE_URL}/user/`);
       setUsers(response.data.users);
     }
     getUsers();
