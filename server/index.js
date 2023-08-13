@@ -15,6 +15,7 @@ const storeRoutes = require('./routes/store');
 const slackRoutes = require('./routes/slack');
 const userRoutes = require('./routes/user');
 const textApiRoutes = require('./routes/textApi');
+const draftRoutes = require('./routes/draft');
 
 dotenv.config();
 connectDB();
@@ -36,6 +37,7 @@ app.use('/user', userRoutes);
 app.use('/discord', discordRoutes);
 app.use('/slack', slackRoutes);
 app.use('/text', textApiRoutes);
+app.use('/draft', draftRoutes);
 
 app.get('/', (req, res) => {
   res.send({

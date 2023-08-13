@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { BASE_URL } from '../../constants/constants';
 
 export default function Signup() {
   const emailRef = useRef();
@@ -14,7 +15,7 @@ export default function Signup() {
 
   async function isUserExists(email) {
     try {
-      const response = await axios.get(`http://localhost:5000/user/${email}`);
+      const response = await axios.get(`${BASE_URL}/user/${email}`);
       return response.data.success;
     } catch (error) {
       console.log(error);
