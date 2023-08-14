@@ -2,7 +2,7 @@ const Announcement = require('../models/Announcement');
 const moment = require('moment');
 
 const storeData = async (req, res) => {
-  const { email, subject, body, slack, telegram, discord } = req.body;
+  const { email, subject, body, slack, telegram, discord, imgURL } = req.body;
   const _time = new Date().toLocaleString('en-US', {
     timeZone: 'Asia/Kolkata',
   });
@@ -16,6 +16,7 @@ const storeData = async (req, res) => {
     telegram,
     discord,
     time,
+    ...{ imgURL: imgURL === null ? undefined : imgURL }
   });
 
   try {

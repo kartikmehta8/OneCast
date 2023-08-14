@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import { useAuth } from '../contexts/AuthContext';
 import Draft from './Draft';
+import { checkIfImage } from '../utils';
 import { BASE_URL } from '../constants/constants';
 
 const Announcement = () => {
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
+  const [imgURL, setImgURL] = useState('');
 
   const [slack, setSlack] = useState(false);
   const [discord, setDiscord] = useState(false);
@@ -19,11 +22,20 @@ const Announcement = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (slack === false && discord === false && telegram === false) {
       alert('Please select at least one social media');
       return;
     }
 
+    if (imgURL !== '') {
+      const isValidImage = await checkIfImage(imgURL);
+      if (!isValidImage) {
+        alert('Please enter a valid image URL');
+        return;
+      }
+    }
+    
     const response = await axios.post(`${BASE_URL}/store/`, {
       email: currentUser.email,
       subject,
@@ -31,6 +43,7 @@ const Announcement = () => {
       slack,
       discord,
       telegram,
+      imgURL: imgURL === '' ? null : imgURL,
     });
 
     alert(response.data.success);
@@ -39,6 +52,7 @@ const Announcement = () => {
     setSlack(false);
     setDiscord(false);
     setTelegram(false);
+    setImgURL('');
   };
 
   const handleSubmitDraft = async (e) => {
@@ -80,7 +94,7 @@ const Announcement = () => {
           <h2 className='text-lg mb-4'>Announcement</h2>
           <div className='mb-4'>
             <label className='block text-gray-600 text-sm font-bold mb-2 signUp-font'>
-              Subject
+              Subject *
             </label>
             <input
               type='text'
@@ -92,7 +106,18 @@ const Announcement = () => {
           </div>
           <div className='mb-4'>
             <label className='block text-gray-600 text-sm font-bold mb-2 signUp-font'>
-              Body
+              Image URL
+            </label>
+            <input
+              type='url'
+              className='w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300'
+              value={imgURL}
+              onChange={(e) => setImgURL(e.target.value)}
+            />
+          </div>
+          <div className='mb-4'>
+            <label className='block text-gray-600 text-sm font-bold mb-2 signUp-font'>
+              Body *
             </label>
             <textarea
               className='w-full h-24 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300'
