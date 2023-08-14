@@ -44,6 +44,11 @@ export default function AllAnnouncements() {
             </div>
             <h1 className='text-2xl mt-2'>{item.subject}</h1>
             <div className='my-2'>{item.body}</div>
+            {item.imgURL && (
+              <div className='my-2 underline text-blue-800'>
+                <a href={item.imgURL} rel="noreferrer" target='_blank'>Attachment</a>
+              </div>
+            )}
             <div className='flex mt-2'>
               {item.slack && (
                 <span className='text-white bg-blue-500 mx-2 py-1 px-2 text-sm rounded-lg'>

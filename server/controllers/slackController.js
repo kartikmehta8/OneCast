@@ -1,11 +1,10 @@
 const axios = require('axios');
 
 const sendMessage = async (req, res) => {
-  const { body } = req.body;
-
+  const { body, imgURL } = req.body;
   const SLACK_CHANNEL_ID = 'C05LZV3TZ7X';
-
   const url = `https://slack.com/api/chat.postMessage`;
+
   const headers = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${process.env.SLACK_TOKEN}`,
@@ -14,6 +13,20 @@ const sendMessage = async (req, res) => {
     channel: SLACK_CHANNEL_ID,
     text: body,
   };
+
+  if (imgURL) {
+    data.blocks = [
+      {
+        type: 'image',
+        title: {
+          type: 'plain_text',
+          text: body
+        },
+        image_url: imgURL,
+        alt_text: 'Image'
+      }
+    ];
+  }
 
   try {
     const response = await axios.post(url, data, { headers });
