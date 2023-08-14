@@ -35,7 +35,7 @@ const Announcement = () => {
         return;
       }
     }
-    
+
     const response = await axios.post(`${BASE_URL}/store/`, {
       email: currentUser.email,
       subject,
@@ -70,6 +70,7 @@ const Announcement = () => {
     setSlack(false);
     setDiscord(false);
     setTelegram(false);
+    setImgURL('');
   };
 
   useEffect(() => {
