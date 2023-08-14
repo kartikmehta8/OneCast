@@ -1,5 +1,7 @@
 const Discussion = require('../models/Discussion');
+const User = require('../models/User');
 const moment = require('moment');
+const { sendMailToUser } = require('../utils/sendMail');
 
 const getAllDiscussions = async (req, res) => {
   try {
@@ -18,7 +20,7 @@ const getAllDiscussions = async (req, res) => {
 };
 
 const sendDiscussion = async (req, res) => {
-  const { email, message } = req.body;
+  const { email, message, notify } = req.body;
 
   const _time = new Date().toLocaleString('en-US', {
     timeZone: 'Asia/Kolkata',
@@ -27,13 +29,24 @@ const sendDiscussion = async (req, res) => {
   const time = moment(_time, 'M/D/YYYY, h:mm:ss A').format('DD/MM/YYYY h:mm A');
 
   const newDiscussion = new Discussion({
-    email,
-    message,
-    time,
+    email: email,
+    message: message,
+    time: time,
   });
 
   try {
     await newDiscussion.save();
+
+    if (notify === true) {
+      const users = await User.find();
+
+      users.forEach((user) => {
+        if (user.email !== email) {
+          sendMailToUser(email, user.email, message);
+        }
+      });
+    }
+
     res.status(201).json(newDiscussion);
   } catch (error) {
     res.status(409).json({ message: error.message });

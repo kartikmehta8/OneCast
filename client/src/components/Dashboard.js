@@ -3,11 +3,12 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Announcement from './Announcement';
 import History from './History';
+import Discussion from './Discussion';
 
 export default function Dashboard() {
   const [error, setError] = useState('');
   const { currentUser, logout } = useAuth();
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(0);
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -68,29 +69,38 @@ export default function Dashboard() {
       )}
       <div className='flex justify-center gap-8 signUp-font text-2xl'>
         <div
-          className={active === true ? 'text-blue-700 font-bold' : ''}
-          onClick={() => setActive(true)}
+          className={active === 0 ? 'text-blue-700 font-bold' : ''}
+          onClick={() => setActive(0)}
           style={{ cursor: 'pointer' }}
         >
           Announcement
         </div>
         <div
-          className={active === false ? 'text-blue-700 font-bold' : ''}
-          onClick={() => setActive(false)}
+          className={active === 2 ? 'text-blue-700 font-bold' : ''}
+          onClick={() => setActive(2)}
+          style={{ cursor: 'pointer' }}
+        >
+          Discussion
+        </div>
+        <div
+          className={active === 1 ? 'text-blue-700 font-bold' : ''}
+          onClick={() => setActive(1)}
           style={{ cursor: 'pointer' }}
         >
           History
         </div>
       </div>
       <div>
-        {active ? (
+        {active === 0 ? (
           <div>
             <Announcement />
           </div>
-        ) : (
+        ) : active === 1 ? (
           <div>
             <History />
           </div>
+        ) : (
+          <Discussion email={currentUser.email} />
         )}
       </div>
     </div>
