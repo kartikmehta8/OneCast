@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth } from '../contexts/AuthContext';
-import Draft from './Draft';
-import { checkIfImage } from '../utils';
-import { BASE_URL } from '../constants/constants';
+import { useAuth } from '../../contexts/AuthContext';
+
+import { Draft } from '../index';
+import { checkIfImage } from '../../utils';
+import { BASE_URL } from '../../constants/constants';
 
 const Announcement = () => {
   const [subject, setSubject] = useState('');
@@ -47,12 +48,12 @@ const Announcement = () => {
       imgURL: imgURL === '' ? null : imgURL,
     });
 
-    if (response.data.success) {
+    if (response.data.success === true) {
       if (slack) {
         const res = await axios.post(`${BASE_URL}/slack/`, {
           body,
-          imgURL
-        })
+          imgURL,
+        });
         if (res.data.success) {
           console.log('Slack Success');
         } else {
@@ -62,12 +63,12 @@ const Announcement = () => {
       if (telegram) {
         const res = await axios.post(`${BASE_URL}/telegram/`, {
           body,
-          imgURL
-        })
+          imgURL,
+        });
         if (res.data.success) {
-          console.log('Telegram Success')
+          console.log('Telegram Success');
         } else {
-          console.log('Telegram Failed')
+          console.log('Telegram Failed');
         }
       }
       alert('Announcement sent successfully');
@@ -118,7 +119,7 @@ const Announcement = () => {
       console.log(error);
       alert('Text generation failed');
     }
-  }
+  };
 
   useEffect(() => {
     async function userAccess(email) {

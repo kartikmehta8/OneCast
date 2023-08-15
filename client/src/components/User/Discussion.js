@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BASE_URL } from '../constants/constants';
+import { BASE_URL, ADMIN_EMAIL } from '../../constants/constants';
 import axios from 'axios';
 
 export default function Discussion({ email }) {
@@ -132,8 +132,7 @@ export default function Discussion({ email }) {
                       <span className='border font-bold border-white rounded-full px-2'>
                         {message.email}
                       </span>
-                      {(email === message.email ||
-                        email === 'kartikmehta202@gmail.com') && (
+                      {(email === message.email || email === ADMIN_EMAIL) && (
                         <span
                           className='px-2 bg-red-500 hover:bg-red-600 rounded-full cursor-pointer'
                           style={{ fontSize: '10px' }}

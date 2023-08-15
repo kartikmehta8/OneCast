@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import UserCard from './UserCard';
+import { UserCard } from '../index';
 import { BASE_URL } from '../../constants/constants';
 
 export default function Users() {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BASE_URL } from '../constants/constants';
+import { BASE_URL } from '../../constants/constants';
 
 export default function Draft({ email, setSubject, setBody, setShowDraft }) {
   const [drafts, setDrafts] = useState([]);

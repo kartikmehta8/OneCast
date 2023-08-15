@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
-import { BASE_URL } from '../constants/constants';
+import { BASE_URL } from '../../constants/constants';
 
 export default function History() {
   const [data, setData] = useState([]);
@@ -43,7 +43,9 @@ export default function History() {
             <div className='my-2'>{item.body}</div>
             {item.imgURL && (
               <div className='my-2 underline text-blue-800'>
-                <a href={item.imgURL} rel="noreferrer" target='_blank'>Attachment</a>
+                <a href={item.imgURL} rel='noreferrer' target='_blank'>
+                  Attachment
+                </a>
               </div>
             )}
             <div className='flex mt-2'>

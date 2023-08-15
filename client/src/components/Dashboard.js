@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import Announcement from './Announcement';
-import History from './History';
-import Discussion from './Discussion';
+
+import { Announcement, History, Discussion } from './index';
+import { ADMIN_EMAIL } from '../constants/constants';
 
 export default function Dashboard() {
   const [error, setError] = useState('');
@@ -37,7 +37,7 @@ export default function Dashboard() {
             {currentUser.email}
           </span>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          {currentUser.email === 'kartikmehta202@gmail.com' ? (
+          {currentUser.email === ADMIN_EMAIL ? (
             <button
               onClick={() => navigate('/admin')}
               className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold h-8 px-2  rounded focus:outline-none focus:shadow-outline signUp-font'
@@ -57,7 +57,7 @@ export default function Dashboard() {
           </button>
         </div>
       </div>
-      {currentUser.email === 'kartikmehta202@gmail.com' ? (
+      {currentUser.email === ADMIN_EMAIL ? (
         <div
           className='signUp-font ml-12 text-gray-900 text-lg'
           style={{ marginTop: '-15px' }}
