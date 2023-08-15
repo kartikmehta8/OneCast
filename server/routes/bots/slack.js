@@ -1,5 +1,8 @@
 const express = require('express');
-const { sendMessage, getChannels } = require('../controllers/slackController');
+const {
+  sendMessage,
+  getChannels,
+} = require('../../controllers/bots/slackController');
 
 const router = express.Router();
 

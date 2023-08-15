@@ -1,4 +1,4 @@
-const Draft = require('../models/Draft');
+const Draft = require('../../models/Draft');
 const moment = require('moment');
 
 const getAllDraftsByEmail = async (req, res) => {

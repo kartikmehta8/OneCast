@@ -6,7 +6,7 @@ const CHANNEL_ID = '@onecasttest';
 const sendMessageToChannel = async (message, imgURL) => {
   try {
     const formData = new FormData();
-    const axiosConfig = {}
+    const axiosConfig = {};
 
     formData.append('chat_id', CHANNEL_ID);
 
@@ -14,13 +14,17 @@ const sendMessageToChannel = async (message, imgURL) => {
       formData.append('caption', message);
       formData.append('photo', imgURL);
       axiosConfig.headers = {
-        'Content-Type': 'multipart/form-data'
-      }
+        'Content-Type': 'multipart/form-data',
+      };
     } else {
       formData.append('text', message);
     }
 
-    const { data } = await axios.post(`${TELEGRAM_API}/${imgURL ? 'sendPhoto' : 'sendMessage'}`, formData, axiosConfig);
+    const { data } = await axios.post(
+      `${TELEGRAM_API}/${imgURL ? 'sendPhoto' : 'sendMessage'}`,
+      formData,
+      axiosConfig
+    );
 
     return { status: 'OK', data: data };
   } catch (error) {

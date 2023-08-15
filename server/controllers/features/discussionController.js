@@ -1,7 +1,7 @@
-const Discussion = require('../models/Discussion');
-const User = require('../models/User');
+const Discussion = require('../../models/Discussion');
+const User = require('../../models/User');
 const moment = require('moment');
-const { sendMailToUser } = require('../utils/sendMail');
+const { sendMailToUser } = require('../../utils/sendMail');
 
 const getAllDiscussions = async (req, res) => {
   try {

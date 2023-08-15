@@ -8,15 +8,14 @@ const morgan = require('./middlewares/Morgan');
 const connectDB = require('./config/ConnectDB');
 
 // Routes Import
-const sampleRoutes = require('./routes/sample');
-const telegramRoutes = require('./routes/telegram');
-const discordRoutes = require('./routes/discord');
+const telegramRoutes = require('./routes/bots/telegram');
+const discordRoutes = require('./routes/bots/discord');
 const storeRoutes = require('./routes/store');
-const slackRoutes = require('./routes/slack');
+const slackRoutes = require('./routes/bots/slack');
 const userRoutes = require('./routes/user');
-const textApiRoutes = require('./routes/textApi');
-const draftRoutes = require('./routes/draft');
-const discussionRoutes = require('./routes/discussion');
+const textApiRoutes = require('./routes/features/textApi');
+const draftRoutes = require('./routes/features/draft');
+const discussionRoutes = require('./routes/features/discussion');
 
 dotenv.config();
 connectDB();
@@ -31,7 +30,6 @@ app.use(bodyParser);
 app.use(morgan);
 
 // Routes
-app.use('/sample', sampleRoutes);
 app.use('/store', storeRoutes);
 app.use('/telegram', telegramRoutes);
 app.use('/user', userRoutes);
@@ -43,7 +41,6 @@ app.use('/discussion', discussionRoutes);
 
 app.get('/', (req, res) => {
   res.send({
-    server: 'Express',
     status: 'OK',
   });
 });

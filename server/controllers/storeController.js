@@ -16,7 +16,7 @@ const storeData = async (req, res) => {
     telegram,
     discord,
     time,
-    ...{ imgURL: imgURL === null ? undefined : imgURL }
+    ...{ imgURL: imgURL === null ? undefined : imgURL },
   });
 
   try {

@@ -20,11 +20,11 @@ const sendMessage = async (req, res) => {
         type: 'image',
         title: {
           type: 'plain_text',
-          text: body
+          text: body,
         },
         image_url: imgURL,
-        alt_text: 'Image'
-      }
+        alt_text: 'Image',
+      },
     ];
   }
 

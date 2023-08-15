@@ -4,7 +4,7 @@ const {
   getAllDiscussions,
   sendDiscussion,
   deleteDiscussion,
-} = require('../controllers/discussionController');
+} = require('../../controllers/features/discussionController');
 
 const router = express.Router();
 

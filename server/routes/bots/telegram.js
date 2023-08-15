@@ -1,5 +1,5 @@
 const express = require('express');
-const { sendMessage } = require('../controllers/discordController');
+const { sendMessage } = require('../../controllers/bots/telegramController');
 
 const router = express.Router();
 

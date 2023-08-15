@@ -3,7 +3,7 @@ const {
   getAllDraftsByEmail,
   createDraft,
   deleteDraft,
-} = require('../controllers/draftController');
+} = require('../../controllers/features/draftController');
 
 const router = express.Router();
 
