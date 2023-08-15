@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../contexts/AuthContext';
 import Draft from './Draft';
 import { checkIfImage } from '../utils';
@@ -46,13 +47,39 @@ const Announcement = () => {
       imgURL: imgURL === '' ? null : imgURL,
     });
 
-    alert(response.data.success);
-    setSubject('');
-    setBody('');
-    setSlack(false);
-    setDiscord(false);
-    setTelegram(false);
-    setImgURL('');
+    if (response.data.success) {
+      if (slack) {
+        const res = await axios.post(`${BASE_URL}/slack/`, {
+          body,
+          imgURL
+        })
+        if (res.data.success) {
+          console.log('Slack Success');
+        } else {
+          console.log('Slack Failed');
+        }
+      }
+      if (telegram) {
+        const res = await axios.post(`${BASE_URL}/telegram/`, {
+          body,
+          imgURL
+        })
+        if (res.data.success) {
+          console.log('Telegram Success')
+        } else {
+          console.log('Telegram Failed')
+        }
+      }
+      alert('Announcement sent successfully');
+      setSubject('');
+      setBody('');
+      setSlack(false);
+      setDiscord(false);
+      setTelegram(false);
+      setImgURL('');
+    } else {
+      alert('Announcement failed to send');
+    }
   };
 
   const handleSubmitDraft = async (e) => {
@@ -72,6 +99,26 @@ const Announcement = () => {
     setTelegram(false);
     setImgURL('');
   };
+
+  const generateText = async () => {
+    if (subject === '') {
+      alert('Please enter a subject');
+      return;
+    }
+    try {
+      const response = await axios.post(`${BASE_URL}/text/`, {
+        body: subject,
+      });
+      if (response.data.success) {
+        setBody(response.data.data.output);
+      } else {
+        alert('Text generation failed');
+      }
+    } catch (error) {
+      console.log(error);
+      alert('Text generation failed');
+    }
+  }
 
   useEffect(() => {
     async function userAccess(email) {
@@ -132,6 +179,7 @@ const Announcement = () => {
             <span
               style={{ cursor: 'pointer' }}
               className='bg-green-500 hover:bg-green-700 text-white font-bold h-10 py-2 px-4  rounded focus:outline-none focus:shadow-outline signUp-font'
+              onClick={generateText}
             >
               &nbsp;GenAI&nbsp;
             </span>
