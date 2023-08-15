@@ -1,11 +1,14 @@
-import Signup from './components/Auth/Signup';
-import Login from './components/Auth/Login';
-import ForgotPassword from './components/Auth/ForgotPassword';
 import { AuthProvider } from './contexts/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute';
-import Main from './components/Main';
-import AdminRoute from './components/Admin/AdminRoute';
+
+import {
+  AdminRoute,
+  Main,
+  PrivateRoute,
+  ForgotPassword,
+  Login,
+  Signup,
+} from './components/index';
 
 export default function App() {
   return (
