@@ -2,17 +2,17 @@
 const axios = require('axios');
 const webhookURL = process.env.WEBHOOK_URL;
 
-async function sendMessageToChannel(message, imageUrl) {
+async function sendMessageToChannel(message, imgURL) {
   try {
     const payload = {
       content: message,
       embeds: [],
     };
 
-    if (imageUrl) {
+    if (imgURL) {
       payload.embeds.push({
         image: {
-          url: imageUrl,
+          url: imgURL,
         },
       });
     }
@@ -29,7 +29,7 @@ async function sendMessageToChannel(message, imageUrl) {
 }
 
 async function sendMessage(req, res) {
-  const { body, imageUrl } = req.body;
+  const { body, imgURL } = req.body;
 
   if (!body) {
     return res.status(400).send({
@@ -39,7 +39,7 @@ async function sendMessage(req, res) {
     });
   }
 
-  const { status, data } = await sendMessageToChannel(body, imageUrl);
+  const { status, data } = await sendMessageToChannel(body, imgURL);
 
   if (status === 'OK') {
     res.send({

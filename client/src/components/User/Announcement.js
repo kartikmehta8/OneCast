@@ -71,6 +71,18 @@ const Announcement = () => {
           console.log('Telegram Failed');
         }
       }
+      if (discord) {
+        const res = await axios.post(`${BASE_URL}/discord/`, {
+          body,
+          imgURL,
+        });
+        if (res.data.success) {
+          console.log('Discord Success');
+        } else {
+          console.log('Discord Failed');
+        }
+      }
+      
       alert('Announcement sent successfully');
       setSubject('');
       setBody('');
