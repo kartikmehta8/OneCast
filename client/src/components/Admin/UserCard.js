@@ -53,7 +53,7 @@ export default function UserCard({ user, index }) {
   }
 
   return (
-    <div className={'flex mt-12 signUp-font ' + genFlex(index)}>
+    <div className={'flex mt-12 signUp-font transition-transform transform hover:scale-105 ' + genFlex(index)}>
       <div className='p-8 border' style={{ width: '400px' }}>
         <div className='text-2xl font-bold'>{user.email}</div>
         <div className='mt-4'>

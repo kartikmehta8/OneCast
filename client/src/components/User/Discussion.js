@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BASE_URL, ADMIN_EMAIL } from '../../constants/constants';
 import axios from 'axios';
+import { Delete } from '../../assets';
 
 export default function Discussion({ email }) {
   const [message, setMessage] = useState('');
@@ -134,11 +135,11 @@ export default function Discussion({ email }) {
                       </span>
                       {(email === message.email || email === ADMIN_EMAIL) && (
                         <span
-                          className='px-2 bg-red-500 hover:bg-red-600 rounded-full cursor-pointer'
+                          className='px-2 cursor-pointer transition-transform transform hover:scale-110'
                           style={{ fontSize: '10px' }}
                           onClick={() => handleMessageDelete(message._id)}
                         >
-                          X
+                          <img src={Delete} alt='Delete' className='h-6 w-6' />
                         </span>
                       )}
                     </div>
